@@ -26,6 +26,9 @@ export default {
       users: []
     }
   },
+  mounted () {
+    this.loadUsers()
+  },
   methods: {
     async createUser () {
       const url = 'https://vue-firebase-146dd-default-rtdb.europe-west1.firebasedatabase.app/users.json'
@@ -39,11 +42,11 @@ export default {
         })
       })
       const firebaseData = await response.json()
-      console.log(firebaseData)
       this.users.push({
-        firstName: this.firstName,
+        firstName: this.name,
         id: firebaseData.name
       })
+      console.log(this.users)
       this.name = ''
     },
     async loadUsers () {
@@ -56,8 +59,8 @@ export default {
         }
       })
       this.users = result
-      console.log(data)
-      console.log(result)
+      // console.log(data)
+      // console.log(result)
     }
   },
   components: {
