@@ -11,6 +11,7 @@
     <AppUserslList
     :users="users"
     @load-data="loadUsers"
+    @remove-user="removeUser"
     />
     <!-- <app-users-list></app-users-list> -->
   </div>
@@ -61,6 +62,10 @@ export default {
       this.users = result
       // console.log(data)
       // console.log(result)
+    },
+    async removeUser (id) {
+      await axios.delete(`https://vue-firebase-146dd-default-rtdb.europe-west1.firebasedatabase.app/users/${id}.json`)
+      this.users = this.users.filter(user => user.id !== id)
     }
   },
   components: {
